@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+<xacro:macro name="xbot2_joint_driver_macro" params="arm_id">
+<gazebo>
+    <plugin name="xbot2_joint_driver" filename="libxbot2_gz_joint_server.so">
+        <pid>
+        <!-- gains from https://github.com/frankaemika/franka_ros/blob/develop/franka_gazebo/config/franka_hw_sim.yaml -->
+            <gain name="very_small_mot"  p="50"  d="5"/>
+            <gain name="small_mot"  p="150"  d="10"/>
+            <gain name="medium_mot" p="250" d="10"/>
+            <gain name="big_mot"    p="600" d="30"/>
+            <gain name="dagana_mot"  p="10" d="0.5"/>
+            <gain name="fingers_mot"  p="100" d="1"/>
+
+            <pid name="${arm_id}_joint1" profile="small_mot"/>
+            <pid name="${arm_id}_joint2" profile="small_mot"/>
+            <pid name="${arm_id}_joint3" profile="small_mot"/>
+            <pid name="${arm_id}_joint4" profile="small_mot"/>
+            <pid name="${arm_id}_joint5" profile="small_mot"/>
+            <pid name="${arm_id}_joint6" profile="small_mot"/>
+            <pid name="${arm_id}_joint7" profile="small_mot"/>
+            <pid name="dagana_1_claw_joint" profile="dagana_mot"/>
+            <pid name="${arm_id}_finger_joint1" profile="fingers_mot"/>
+            <pid name="${arm_id}_finger_joint2" profile="fingers_mot"/>
+
+        </pid>
+    </plugin>
+</gazebo>
+</xacro:macro>
+
+</robot>
