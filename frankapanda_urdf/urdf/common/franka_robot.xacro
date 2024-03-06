@@ -16,7 +16,16 @@
 
     <xacro:franka_arm arm_id="${arm_id}" safety_distance="0.03" gazebo="$(arg gazebo)" joint_limits="${joint_limits}"/>
 
-    <xacro:if value="$(arg hand)">
+    <xacro:if value="${END_EFFECTOR == 'none'}">
+      <link name="tcp" />
+      <joint name="j_tcp" type="fixed">
+          <parent link="${arm_id}_link8" />
+          <child link="tcp" />
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+      </joint>
+    </xacro:if>
+
+    <xacro:if value="${END_EFFECTOR == 'panda_hand'}">
       <xacro:include filename="$(find frankapanda_urdf)/urdf/common/franka_hand.xacro"/>
       <xacro:franka_hand
           arm_id="$(arg arm_id)"
@@ -26,7 +35,13 @@
           connected_to="$(arg arm_id)_link8"
           safety_distance="0.03"
           gazebo="$(arg gazebo)"
-       />
+      />
+      <link name="tcp" />
+      <joint name="j_tcp" type="fixed">
+          <parent link="${arm_id}_hand_tcp" />
+          <child link="tcp" />
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+      </joint>
     </xacro:if>
 
     <!-- Define additional Gazebo tags -->

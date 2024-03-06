@@ -2,8 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="panda">
 
   <xacro:include filename="$(find frankapanda_urdf)/urdf/common/franka_robot.xacro"/>
-
-  <xacro:arg name="arm_id" default="panda" />
+  <xacro:include filename="$(find frankapanda_urdf)/config/frankapanda.urdf.xacro"/>
 
   <xacro:franka_robot arm_id="$(arg arm_id)"
                       joint_limits="${xacro.load_yaml('$(find franka_description)/robots/panda/joint_limits.yaml')}">

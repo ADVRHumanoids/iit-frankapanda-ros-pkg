@@ -1,12 +1,12 @@
 <launch>
 
-    <arg name="gui" default="true" />
+    <arg name="rviz" default="true" />
     <arg name="visualize_inertia" default="false" />
     <arg name="hand" default="false" />
 
     <arg name="xacroArm" value="$(find frankapanda_urdf)/urdf/panda.urdf.xacro 
          hand:=$(arg hand)
-         gazebo:=false
+         gazebo:=$(arg visualize_inertia)
          "
     />
 
@@ -25,8 +25,8 @@
         <param name="publish_frequency" type="double" value="250.0" />
     </node> 
 
-    <node pkg="rviz" type="rviz" name="rviz" output="screen" if="$(arg gui)" args="-d $(find frankapanda_urdf)/config/frankapanda.rviz">
-    </node> 
+    <include if="$(arg rviz)" file="$(find frankapanda_urdf)/launch/frankapanda_rviz.launch">
+    </include>
 
     <node if="$(arg visualize_inertia)" pkg="robot_inertia_publisher" type="robot_inertia_publisher" name="robot_inertia_publisher" output="screen" />
 
