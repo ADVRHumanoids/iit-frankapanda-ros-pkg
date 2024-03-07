@@ -4,8 +4,35 @@
   <xacro:include filename="$(find frankapanda_urdf)/urdf/common/franka_robot.xacro"/>
   <xacro:include filename="$(find frankapanda_urdf)/config/frankapanda.urdf.xacro"/>
 
+  <xacro:arg name="x" default="0"/>
+  <xacro:arg name="y" default="0"/>
+  <xacro:arg name="z" default="0"/>
+  <xacro:arg name="roll" default="0"/>
+  <xacro:arg name="pitch" default="0"/>
+  <xacro:arg name="yaw" default="0"/>
+
+  <xacro:if value="$(arg gazebo)">
+    <xacro:arg name="parent" default="world"/>
+    <link name="$(arg parent)" />
+  </xacro:if>
+  <xacro:unless value="$(arg gazebo)">
+    <xacro:arg name="parent" default=""/>
+  </xacro:unless>
+
+  <xacro:property name="parent" value="$(arg parent)"/>
+
+  <xacro:unless value="${parent == ''}">
+    <joint name="${parent}_joint" type="fixed">
+        <parent link="${parent}" />
+        <child link="$(arg arm_id)_link0" />
+        <origin xyz="$(arg x) $(arg y) $(arg z)" rpy="$(arg roll) $(arg pitch) $(arg yaw)"/>
+    </joint>
+  </xacro:unless>
+
   <xacro:franka_robot arm_id="$(arg arm_id)"
-                      joint_limits="${xacro.load_yaml('$(find franka_description)/robots/panda/joint_limits.yaml')}">
+                      joint_limits="${xacro.load_yaml('$(find frankapanda_urdf)/urdf/joint_limits.yaml')}">
   </xacro:franka_robot>
+
+
 
 </robot>

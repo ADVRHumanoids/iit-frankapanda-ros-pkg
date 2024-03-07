@@ -1,6 +1,8 @@
 XBotInterface:
-  urdf: xacro $(rospack find frankapanda_urdf)/urdf/panda.urdf.xacro
-  srdf: xacro $(rospack find frankapanda_srdf)/srdf/panda.srdf.xacro
+  #first is necessary when gazebo and a table mounting are used
+  #urdf: xacro $(rospack find frankapanda_urdf)/urdf/panda.urdf.xacro gazebo:=true end_effector:=panda_hand x:=-0.27500 y:=-0.50000 z:=0.85300
+  urdf: xacro $(rospack find frankapanda_urdf)/urdf/panda.urdf.xacro gazebo:=false end_effector:=panda_hand
+  srdf: xacro $(rospack find frankapanda_srdf)/srdf/panda.srdf.xacro end_effector:=panda_hand
 
 ModelInterface:
   model_type: "RBDL"

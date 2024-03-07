@@ -9,6 +9,11 @@
         <chain base_link="${arm_id}_link0" tip_link="tcp"/>
     </group>
 
+    <xacro:if value="${END_EFFECTOR == 'dagana'}">
+        <group name="dagana">
+            <chain base_link="${arm_id}_link8" tip_link="dagana_1_bottom_link"/>
+        </group>
+    </xacro:if>
     <xacro:if value="${END_EFFECTOR == 'panda_hand'}">
         <group name="${arm_id}_finger1">
             <chain base_link="${arm_id}_hand" tip_link="panda_leftfinger"/>
@@ -22,6 +27,9 @@
 	<!-- FATHER GROUPS -->
 	<group name="chains">
 		<group name="arm"/>
+        <xacro:if value="${END_EFFECTOR == 'dagana'}">
+            <group name="dagana"></group>
+        </xacro:if>
         <xacro:if value="${END_EFFECTOR == 'panda_hand'}">
             <group name="${arm_id}_finger1"/>
             <group name="${arm_id}_finger2"/>

@@ -7,10 +7,10 @@
 <xacro:arg name="arm_id" default="panda" />
 <xacro:property name="arm_id" value="$(arg arm_id)" />
 
-<xacro:arg name="gazebo" default="true" />
+<xacro:arg name="gazebo" default="false" />
 <xacro:property name="gazebo" value="$(arg gazebo)" />
 
-<xacro:arg name="end_effector" default="panda_hand"/> <!-- none, panda_hand, dagana_fixed, dagana -->
+<xacro:arg name="end_effector" default="panda_hand"/> <!-- none, panda_hand, dagana -->
 <xacro:property name="END_EFFECTOR" value="$(arg end_effector)" />
 
 </robot>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="rviz" default="true" />
+    <arg name="end_effector" default="panda_hand" />
+
+<!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find frankapanda_gazebo)/worlds/frankapanda.world"/> 
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+        <arg name="recording" value="false"/>
+        <arg name="debug" value="false"/>
+        <arg name="verbose" value="true"/>
+        <arg name="physics" value="ode"/>
+<!--   to record log, btw deprecated name now it is recording      -->
+<!--        <arg name="headless" default="false"/> -->
+    </include>
+
+    <!-- ***************************** ROBOT   ********************************************************************************************** -->
+
+    <include file="$(find frankapanda_gazebo)/launch/loaders/load_frankapanda.launch">
+        <arg name="end_effector" default="$(arg end_effector)" />
+    </include>
+    
+    <!-- *************************** RVIZ OPTION ********************************************************************************************* -->
+    <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz" output="screen" args="-d $(find frankapanda_urdf)/config/frankapanda.rviz">
+    </node> 
+
+</launch>
+
