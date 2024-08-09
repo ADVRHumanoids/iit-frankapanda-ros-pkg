@@ -42,7 +42,9 @@
       command="xacro '$(find panda_moveit_config)/config/panda.srdf.xacro' hand:=$(arg use_gripper) arm_id:=$(arg arm_id)" />
 
   <rosparam file="$(find franka_gazebo)/config/franka_hw_sim.yaml" subst_value="true" />
-  <!-- <rosparam file="$(find franka_gazebo)/config/sim_controllers.yaml" subst_value="true" /> -->
+
+  <!-- Custom controllers instead of this:
+    <rosparam file="$(find franka_gazebo)/config/sim_controllers.yaml" subst_value="true" /> -->
   <rosparam file="$(find franka_description)/config/panda_controllers.yaml" subst_value="true" />
 
   <param name="m_ee" value="0.76" if="$(arg use_gripper)" />
@@ -57,7 +59,7 @@
   <!-- Spawn required ROS controllers -->
   <node pkg="controller_manager"
         type="spawner"
-        name="$(arg arm_id)_gripper_spawner"
+        name="$(arg arm_id)_controller_gripper_spawner"
         if="$(arg use_gripper)"
         args="franka_gripper"
         respawn="false"
