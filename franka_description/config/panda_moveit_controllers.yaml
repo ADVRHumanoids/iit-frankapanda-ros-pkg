@@ -11,9 +11,3 @@ controller_list:
       - $(arg arm_id)_joint5
       - $(arg arm_id)_joint6
       - $(arg arm_id)_joint7
-  - name: franka_gripper
-    action_ns: gripper_action
-    type: GripperCommand
-    default: True
-    joints:
-      - $(arg arm_id)_finger_joint1
