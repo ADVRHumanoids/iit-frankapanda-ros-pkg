@@ -43,8 +43,6 @@
        for moveit servo (and not only the joint_trajectory_position_controller)-->
   <rosparam command="load" file="$(find franka_description)/config/panda_controllers.yaml" subst_value="true" />
 
-
-
   <node name="$(arg arm_id)_controller_spawner"
     pkg="controller_manager" 
     type="spawner" 
