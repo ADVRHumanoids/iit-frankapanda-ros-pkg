@@ -1,0 +1,39 @@
+arm_id: $(arg arm_id)
+joint_names:
+  - $(arg arm_id)_joint1
+  - $(arg arm_id)_joint2
+  - $(arg arm_id)_joint3
+  - $(arg arm_id)_joint4
+  - $(arg arm_id)_joint5
+  - $(arg arm_id)_joint6
+  - $(arg arm_id)_joint7
+
+# Configure the threshold angle for printing joint limit warnings.
+joint_limit_warning_threshold: 0.1 # [rad]
+# Activate rate limiter? [true|false]
+rate_limiting: true
+# Cutoff frequency of the low-pass filter. Set to >= 1000 to deactivate.
+cutoff_frequency: 100
+# Internal controller for motion generators [joint_impedance|cartesian_impedance]
+internal_controller: joint_impedance
+# Used to decide whether to enforce realtime mode [enforce|ignore]
+realtime_config: enforce
+# Configure the initial defaults for the collision behavior reflexes.
+# Set separate torque and force boundaries for acceleration/deceleration 
+# and constant velocity movement phases.
+# Forces or torques between lower and upper threshold are shown as contacts 
+# in the RobotState. Forces or torques above the upper threshold are registered 
+# as collision and cause the robot to stop moving.
+collision_config:
+  lower_torque_thresholds_acceleration: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]  # [Nm]
+  #upper_torque_thresholds_acceleration: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]  # [Nm]
+  upper_torque_thresholds_acceleration: [40.0, 40.0, 36.0, 36.0, 32.0, 28.0, 24.0]  # [Nm]
+  lower_torque_thresholds_nominal: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]  # [Nm]
+  #upper_torque_thresholds_nominal: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]  # [Nm]
+  upper_torque_thresholds_nominal:     [50.0, 50.0, 40.0, 40.0, 38.0, 36.0, 26.0]  # [Nm]
+  lower_force_thresholds_acceleration: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
+  #upper_force_thresholds_acceleration: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
+  upper_force_thresholds_acceleration: [40.0, 40.0, 40.0, 50.0, 50.0, 50.0]  # [N, N, N, Nm, Nm, Nm]
+  lower_force_thresholds_nominal: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
+  #upper_force_thresholds_nominal: [20.0, 20.0, 20.0, 25.0, 25.0, 25.0]  # [N, N, N, Nm, Nm, Nm]
+  upper_force_thresholds_nominal: [52.0, 52.0, 52.0, 62.0, 62.0, 62.0]  # [N, N, N, Nm, Nm, Nm]
