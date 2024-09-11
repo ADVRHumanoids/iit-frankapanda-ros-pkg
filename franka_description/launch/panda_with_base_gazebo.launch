@@ -56,7 +56,9 @@
               $(arg initial_joint_positions)
               "/>
 
-  <!-- Spawn required ROS controllers -->
+  <!-- Gripper sim controller-->
+  <!-- Check issue  https://github.com/frankaemika/franka_ros/issues/396 -->
+  <rosparam param="/franka_gripper/gripper_action/width_tolerance"> 5 </rosparam> 
   <node pkg="controller_manager"
         type="spawner"
         name="$(arg arm_id)_controller_gripper_spawner"
