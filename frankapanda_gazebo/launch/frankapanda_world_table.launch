@@ -2,6 +2,8 @@
 <launch>
 
     <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}] [${node}] [${function}] [${line}]: ${message}"/>
+    <arg name="end_effector" default="panda_hand" />
+    <arg name="use_round_base" default="true" />
 
     <arg name="rviz" default="true" />
 
@@ -46,6 +48,8 @@
     <!-- ***************************** ROBOT   ******************************************************************** -->
     
     <include file="$(find frankapanda_gazebo)/launch/loaders/load_frankapanda.launch">
+        <arg name="end_effector" default="$(arg end_effector)" />
+        <arg name="use_round_base" default="$(arg use_round_base)" />
         <arg name="pose_x" value="$(eval t_pose_x - (t_size_x/2 - 0.10))" />
         <arg name="pose_y" value="$(eval t_pose_y - (t_size_y/2 - 0.10))" />
         <arg name="pose_z" value="$(eval surface_high)" />

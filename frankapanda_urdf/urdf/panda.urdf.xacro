@@ -2,6 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="panda">
 
   <xacro:include filename="$(find frankapanda_urdf)/urdf/common/franka_robot.xacro"/>
+  <xacro:include filename="$(find frankapanda_urdf)/urdf/common/utils.xacro"/>
   <xacro:include filename="$(find frankapanda_urdf)/config/frankapanda.urdf.xacro"/>
 
   <xacro:arg name="x" default="0"/>
@@ -24,15 +25,54 @@
   <xacro:unless value="${parent == ''}">
     <joint name="${parent}_joint" type="fixed">
         <parent link="${parent}" />
-        <child link="$(arg arm_id)_link0" />
+        <xacro:if value="${USE_ROUND_BASE}">
+          <child link="$(arg arm_id)_round_base_link" />
+        </xacro:if>
+        <xacro:unless value="${USE_ROUND_BASE}">
+          <child link="$(arg arm_id)_link0" />
+        </xacro:unless>
         <origin xyz="$(arg x) $(arg y) $(arg z)" rpy="$(arg roll) $(arg pitch) $(arg yaw)"/>
     </joint>
   </xacro:unless>
 
-  <xacro:franka_robot arm_id="$(arg arm_id)"
-                      joint_limits="${xacro.load_yaml('$(find frankapanda_urdf)/urdf/joint_limits.yaml')}">
-  </xacro:franka_robot>
+  <xacro:if value="${USE_ROUND_BASE}">
 
+    <link name="$(arg arm_id)_round_base_link">
+      <visual>
+        <origin xyz="0 0 0.01" rpy="0 0 0" />
+        <geometry>
+          <cylinder radius="0.15" length="0.02"/>
+        </geometry>
+        <material name="panda_round_base_link_material">
+          <color rgba="0.4431 0.47 0.494 1"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.01" rpy="0 0 0" />
+        <geometry>
+          <cylinder radius="0.15" length="0.02"/>
+        </geometry>
+      </collision>
+      <xacro:if value="$(arg gazebo)">
+        <xacro:cylinder_inertial mass="1" length="0.10" radius="0.1">
+            <origin xyz="0 0 0.05" rpy="0 0 0" />
+        </xacro:cylinder_inertial>    
+      </xacro:if>
+    </link>
+
+    <xacro:franka_robot arm_id="$(arg arm_id)"
+                        joint_limits="${xacro.load_yaml('$(find frankapanda_urdf)/urdf/joint_limits.yaml')}"
+                        parent="$(arg arm_id)_round_base_link"
+                        xyz="0.05 0.004 0.02">
+    </xacro:franka_robot>  
+
+  </xacro:if>
+  
+  <xacro:unless value="${USE_ROUND_BASE}">
+    <xacro:franka_robot arm_id="$(arg arm_id)"
+                        joint_limits="${xacro.load_yaml('$(find frankapanda_urdf)/urdf/joint_limits.yaml')}">
+    </xacro:franka_robot>
+  </xacro:unless>
 
 
 </robot>

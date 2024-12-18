@@ -159,6 +159,16 @@
     </inertial>
   </xacro:macro>
 
+  <xacro:macro name="cylinder_inertial" params="radius length mass *origin">
+      <inertial>
+      <mass value="${mass}" />
+      <xacro:insert_block name="origin" />
+      <inertia ixx="${0.0833333 * mass * (3 * radius * radius + length * length)}" ixy="0.0" ixz="0.0"
+          iyy="${0.0833333 * mass * (3 * radius * radius + length * length)}" iyz="0.0"
+          izz="${0.5 * mass * radius * radius}" />
+      </inertial>
+  </xacro:macro>
+
   <!-- ========================================================================= -->
   <!-- Adds the <limit ... /> & <safety_controller/> tags given a config file    -->
   <!-- of joint limits                                                           -->

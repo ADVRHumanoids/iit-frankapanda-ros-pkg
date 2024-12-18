@@ -10,6 +10,7 @@
     <arg name="waitFor" default="" doc="Name of another model to wait. Option to wait for another model to be spawned first (eg a table on which the arm must stay on)" />
     <arg name="pub_world_tf" default="false" />
     <arg name="end_effector" default="panda_hand" />
+    <arg name="use_round_base" default="true" />
 
     <arg name="xacroArm" value="$(find frankapanda_urdf)/urdf/panda.urdf.xacro
          x:=$(arg pose_x)
@@ -20,6 +21,7 @@
          yaw:=$(arg pose_yaw)
          end_effector:=$(arg end_effector)
          gazebo:=true
+         use_round_base:=$(arg use_round_base)
          "
     />
 

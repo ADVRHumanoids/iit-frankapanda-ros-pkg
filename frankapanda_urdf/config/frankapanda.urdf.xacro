@@ -10,6 +10,9 @@
 <xacro:arg name="gazebo" default="false" />
 <xacro:property name="gazebo" value="$(arg gazebo)" />
 
+<xacro:arg name="use_round_base" default="true"/>
+<xacro:property name="USE_ROUND_BASE" value="$(arg use_round_base)" />
+
 <xacro:arg name="end_effector" default="panda_hand"/> <!-- none, panda_hand, dagana -->
 <xacro:property name="END_EFFECTOR" value="$(arg end_effector)" />
 
