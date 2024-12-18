@@ -16,4 +16,7 @@
 <xacro:arg name="end_effector" default="panda_hand"/> <!-- none, panda_hand, dagana -->
 <xacro:property name="END_EFFECTOR" value="$(arg end_effector)" />
 
+<xacro:arg name="nicla" default="false"/> <!-- the nicla inside the dagana-->
+<xacro:property name="NICLA" value="$(arg nicla)" />
+
 </robot>
