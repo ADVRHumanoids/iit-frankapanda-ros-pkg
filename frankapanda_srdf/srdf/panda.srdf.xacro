@@ -63,6 +63,10 @@
     <disable_collisions link1="${arm_id}_link5" link2="${arm_id}_link6" reason="Adjacent"/>
     <disable_collisions link1="${arm_id}_link6" link2="${arm_id}_link7" reason="Adjacent"/>
 
+    <xacro:if value="${USE_ROUND_BASE}">
+        <disable_collisions link1="${arm_id}_round_base_link" link2="${arm_id}_link0" reason="Adjacent"/>
+    </xacro:if>
+
     <xacro:if value="${END_EFFECTOR == 'dagana'}">
         <disable_collisions link1="${arm_id}_link6" link2="dagana_1_bottom_link" reason="Never"/>
         <disable_collisions link1="${arm_id}_link6" link2="dagana_1_top_link" reason="Never"/>        
