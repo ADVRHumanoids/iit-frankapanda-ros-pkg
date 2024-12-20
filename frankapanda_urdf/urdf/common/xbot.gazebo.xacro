@@ -7,9 +7,9 @@
         <pid>
         <!-- gains from https://github.com/frankaemika/franka_ros/blob/develop/franka_gazebo/config/franka_hw_sim.yaml -->
             <gain name="very_small_mot"  p="50"  d="5"/>
-            <gain name="small_mot"  p="150"  d="10"/>
-            <gain name="medium_mot" p="250" d="10"/>
-            <gain name="big_mot"    p="600" d="30"/>
+            <gain name="small_mot"  p="600"  d="6"/>
+            <gain name="medium_mot" p="7000" d="50"/>
+            <gain name="big_mot"    p="8000" d="50"/>
             <xacro:if value="${END_EFFECTOR == 'dagana'}">
                 <gain name="dagana_mot"  p="10" d="0.5"/>
             </xacro:if>
@@ -17,12 +17,13 @@
                 <gain name="fingers_mot"  p="100" d="1"/>
             </xacro:if>
 
-            <pid name="${arm_id}_joint1" profile="small_mot"/>
-            <pid name="${arm_id}_joint2" profile="small_mot"/>
-            <pid name="${arm_id}_joint3" profile="small_mot"/>
-            <pid name="${arm_id}_joint4" profile="small_mot"/>
-            <pid name="${arm_id}_joint5" profile="small_mot"/>
-            <pid name="${arm_id}_joint6" profile="small_mot"/>
+
+            <pid name="${arm_id}_joint1" profile="medium_mot"/>
+            <pid name="${arm_id}_joint2" profile="medium_mot"/>
+            <pid name="${arm_id}_joint3" profile="medium_mot"/>
+            <pid name="${arm_id}_joint4" profile="medium_mot"/>
+            <pid name="${arm_id}_joint5" profile="medium_mot"/>
+            <pid name="${arm_id}_joint6" profile="medium_mot"/>
             <pid name="${arm_id}_joint7" profile="small_mot"/>
             <xacro:if value="${END_EFFECTOR == 'dagana'}">
                 <pid name="dagana_1_claw_joint" profile="dagana_mot"/>

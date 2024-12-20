@@ -130,6 +130,8 @@
         <surface>
           <contact>
             <ode>
+              <kp>100000.0</kp>
+              <kd>1.0</kd>
               <!-- These two parameter need application specific tuning. -->
               <!-- Usually you want no "snap out" velocity and a generous -->
               <!-- penetration depth to keep the grasping stable -->
