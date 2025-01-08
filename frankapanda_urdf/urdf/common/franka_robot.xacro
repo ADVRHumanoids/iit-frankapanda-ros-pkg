@@ -33,7 +33,30 @@
     <xacro:if value="${END_EFFECTOR == 'dagana'}">
         <xacro:include filename="$(find dagana_urdf)/urdf/dagana_macro.urdf.xacro" />
 
-        <xacro:dagana_gripper name="dagana_1" parent_link="${arm_id}_link8" joint_type="revolute">
+        <link name="dagana_mount">
+          <visual>
+            <geometry>
+              <mesh filename="package://frankapanda_urdf/meshes/visual/ce0327_iso-adapter.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="mount_dagana_dark_grey"/>
+          </visual>
+          <collision>
+            <geometry>
+              <mesh filename="package://frankapanda_urdf/meshes/visual/ce0327_iso-adapter.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+          </collision>
+          <!-- TODO put real inertia -->
+          <xacro:cylinder_inertial mass="0.200" length="0.027" radius="0.10">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+          </xacro:cylinder_inertial>
+        </link>
+        <joint name="${arm_id}_link8_to_dagana" type="fixed">
+            <parent link="${arm_id}_link8" />
+            <child link="dagana_mount" />
+            <origin xyz="0 0 0.00135" rpy="0 0 0"/>
+        </joint>
+
+        <xacro:dagana_gripper name="dagana_1" parent_link="dagana_mount" joint_type="revolute">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:dagana_gripper>
         
