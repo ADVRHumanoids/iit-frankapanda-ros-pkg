@@ -12,15 +12,13 @@
   <xacro:arg name="pitch" default="0"/>
   <xacro:arg name="yaw" default="0"/>
 
-  <xacro:if value="$(arg gazebo)">
-    <xacro:arg name="parent" default="world"/>
-    <link name="$(arg parent)" />
-  </xacro:if>
-  <xacro:unless value="$(arg gazebo)">
-    <xacro:arg name="parent" default=""/>
-  </xacro:unless>
-
+  <xacro:arg name="parent" default="world"/>
   <xacro:property name="parent" value="$(arg parent)"/>
+  <xacro:if value="${parent == 'world'}">
+      <link name="$(arg parent)" />
+      <!-- Otherwise it is assumed that the parent link is defined in the caller -->
+  </xacro:if>
+
 
   <xacro:unless value="${parent == ''}">
     <joint name="${parent}_joint" type="fixed">
