@@ -19,6 +19,9 @@
 <xacro:arg name="nicla" default="false"/> <!-- the nicla inside the dagana-->
 <xacro:property name="NICLA" value="$(arg nicla)" />
 
+<xacro:arg name="safety_distance" default="0.03"/> <!-- for collision meshes, used only when gazebo:=false (I do not know why)-->
+<xacro:property name="SAFETY_DISTANCE" value="$(arg safety_distance)" />
+
 <material name="mount_dagana_dark_grey">
 	<color rgba="0.2 0.2 0.2 1"/>
 </material>

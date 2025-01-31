@@ -13,7 +13,7 @@
 
     <xacro:franka_arm 
       arm_id="${arm_id}" 
-      safety_distance="0.03" 
+      safety_distance="${SAFETY_DISTANCE}" 
       gazebo="$(arg gazebo)" 
       joint_limits="${joint_limits}"
       connected_to="${parent}"
