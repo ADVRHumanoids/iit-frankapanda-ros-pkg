@@ -1,18 +1,11 @@
-project(${ROBOT_NAME}_srdf)
+cmake_minimum_required(VERSION 3.20)
+project(frankapanda_srdf)
 
-find_package(catkin REQUIRED)
-
-catkin_package()
-
-# main srdf, with acm
-generate_srdf(
-  XACRO ${ROBOT_NAME}.srdf.xacro 
-  CONFIG config/${ROBOT_NAME}.urdf.xacro 
-  ADD_TO_ALL TRUE
-  GEN_ACM TRUE
-)
+find_package(ament_cmake REQUIRED)
 
 # mark srdf for installation
 install(DIRECTORY srdf
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  DESTINATION share/${PROJECT_NAME}
 )
+
+ament_package()

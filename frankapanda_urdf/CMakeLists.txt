@@ -1,25 +1,26 @@
-project(${ROBOT_NAME}_urdf)
+cmake_minimum_required(VERSION 3.20)
+project(frankapanda_urdf)
 
-find_package(catkin REQUIRED COMPONENTS)
-
-catkin_package()
-
-# mark urdf, meshes and launch files for installation
-install(DIRECTORY meshes
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
+find_package(ament_cmake REQUIRED)
 
 install(DIRECTORY launch
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+ DESTINATION share/${PROJECT_NAME}
 )
 
 install(DIRECTORY urdf
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  DESTINATION share/${PROJECT_NAME}
 )
 
-# main urdf
-generate_urdf(
-  XACRO ${ROBOT_NAME}.urdf.xacro 
-  CONFIG config/${ROBOT_NAME}.urdf.xacro 
-  ADD_TO_ALL TRUE
+install(DIRECTORY meshes
+  DESTINATION share/${PROJECT_NAME}
 )
+
+install(DIRECTORY config
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(DIRECTORY rviz
+  DESTINATION share/${PROJECT_NAME}
+)
+
+ament_package()

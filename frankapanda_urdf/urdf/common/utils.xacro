@@ -41,12 +41,12 @@
     <link name="${prefix}${name}">
       <visual>
         <geometry>
-          <mesh filename="package://${description_pkg}/meshes/visual/${name}.dae" />
+          <mesh filename="file://$(find frankapanda_urdf)/meshes/visual/${name}.dae" />
         </geometry>
       </visual>
       <collision>
         <geometry>
-          <mesh filename="package://${description_pkg}/meshes/collision/${name}.stl" />
+          <mesh filename="file://$(find frankapanda_urdf)/meshes/collision/${name}.stl" />
         </geometry>
       </collision>
       <xacro:inertial_props name="${name}"/>
